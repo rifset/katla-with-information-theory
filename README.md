@@ -298,7 +298,7 @@ Using Information Theory, we learned that the word SARIK is expected to give the
 
 After knowing the optimal first guess, the next step to do is to solve the game itself. Since you know the optimal first guess only, there are still 5 guesses remaining. For now, there is no algorithm to solve Katla using Information Theory, but there is various study done for Wordle. One of the studies, that is also the inspiration of this study, that is well spoken is by [Grant Sanderson](https://www.3blue1brown.com/lessons/wordle). Hence, I leave it to you to do further exploration! :D
 
-Have you done your Katla today? :)
+> "Have you done your Katla today?" :)
 
 # Reference
 
