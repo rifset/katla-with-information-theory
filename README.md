@@ -8,11 +8,11 @@
 
 As mentioned above, the goal is to guess a five-letter “secret” word. Each person has six attempts to guess the correct “secret” word. 
 
-![katla.vercel.app_(iPhone SE).png](imgs/katla.vercel.app_(iPhone_SE).png)
+![katla-view.png](katla-view.png)
 
 For each guess the game will provide feedbacks on which letters are correct and incorrect.
 
-![game-rules.PNG](imgs/game-rules.png)
+![game-rules.PNG](game-rules.png)
 
 - Grey: the letter is not in the “secret” word
 - Yellow: the letter is in the “secret” word, but misplaced
@@ -79,14 +79,14 @@ To calculate each guess’ entropy, we should first understand what is the “ev
 
 Let’s take a look at one of the possible patterns, using my favorite guess ANIMO.
 
-![animo-case.PNG](imgs/animo-case.png)
+![animo-case.PNG](animo-case.png)
 
 The letter A and M are correct but misplaced. While the remaining letter N, I, and O are incorrect. How many five-letter words in the Indonesian language do not contain N, I, and O, but contain A and M not in the 1st and 4th place respectively? 
 
 To answer this question, let’s break down the case. Assume that each possible pattern (of feedback) is a discrete random variable, this is what the “event” we ought to observe. Each event has a probability of happening. Its probability is counted by comparing how many five-letter words satisfy a certain pattern with how many five-letter words exist.
 
 $$
-p(x)=\frac{\#\ words\ that\ satisfy\ pattern}{\#\  all\ possible\ words}
+p(x)=\frac{\\#\ words\ that\ satisfy\ pattern}{\\#\  all\ possible\ words}
 $$
 
 ### Katla Implementation
@@ -112,13 +112,13 @@ With a simple analytical move, I found 433 words that satisfy this particular pa
 Hence, the probability is
 
 $$
-p(🟨⬛⬛🟨⬛)=\frac{433}{8311}=0.05209
+p(x)=\frac{433}{8311}=0.05209
 $$
 
 And the amount of information we get is
 
 $$
-h(🟨⬛⬛🟨⬛)=-\log_{2}(0.05209)=4.26\ bits
+h(x)=-\log_{2}(0.05209)=4.26\ bits
 $$
 
 The information we got from this specific pattern is 4.26 bits, and this pattern is just one of all 243 possible patterns. To get the expected or average amount of information, we must first calculate the possibility of each pattern.
@@ -136,7 +136,7 @@ The information we got from this specific pattern is 4.26 bits, and this pattern
 
 In case you wonder how the distribution looks like, here is the probability distribution sorted from highest to lowest probability
 
-![probability-plot.PNG](imgs/probability-plot.png)
+![probability-plot.PNG](probability-plot.png)
 
 Calculating the expectation
 
