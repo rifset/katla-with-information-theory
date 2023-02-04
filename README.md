@@ -2,7 +2,7 @@
 
 # Introduction
 
-[Katla](https://katla.vercel.app/) is the adaption version of [Wordle](https://www.nytimes.com/games/wordle/)—a viral daily word game by the New York Times—which has the goal to guess a five-letter “secret” word. While Wordle is in the English language, Katla is an adaption version of it in Bahasa Indonesia. Katla was created by [Fatih Kalifa](https://fatihkalifa.com/), a software engineer from Indonesia, and was launched on January 20th, 2022 [1].
+[Katla](https://katla.vercel.app/) is the adaption version of [Wordle](https://www.nytimes.com/games/wordle/)—a viral daily word game by the New York Times—which has the goal to guess a five-letter “secret” word. While Wordle is serve in English, Katla is an adaptation in a form of Bahasa Indonesia. Katla was created by [Fatih Kalifa](https://fatihkalifa.com/), a software engineer from Indonesia, and was launched on January 20th, 2022 [1].
 
 # Game Rules
 
@@ -10,7 +10,7 @@ As mentioned above, the goal is to guess a five-letter “secret” word. Each p
 
 ![katla-view.png](katla-view.png)
 
-For each guess the game will provide feedbacks on which letters are correct and incorrect.
+For each guesses the game will provide feedbacks on which letters are correct and incorrect.
 
 ![game-rules.PNG](game-rules.png)
 
@@ -24,11 +24,11 @@ Depending on what the definition of “optimal” is, here are my three approach
 
 ## Unique Letters
 
-Words containing more unique letters should be better than words with duplicated letters in them. The idea is simple, more unique letters mean more information I could get from each guess’ feedback. There are a plethora of words to use as the first guess such as KAGET, LOBAK, MANDI, etc. Yet, with this approach, I could not decide what specific word is the optimal first guess.
+Words containing more unique letters should be better than words with duplicated letters in them. The idea is simple, the more unique letters submitted, the more information you could get from each guesses’ feedback. There is a plethora of words to use as the first guess such as KAGET, LOBAK, MANDI, etc. Yet, with this approach, I could not decide what specific word is the optimal first guess.
 
 ## Most Frequent Letters
 
-After a quick research, I found that the letters A, N, and E are the most frequent letters in the Indonesian language. You can view the full distribution [here](https://www.sttmedia.com/characterfrequency-indonesian), and this is the top 10 most frequent letters:
+After a quick research, I found that the letters A, N, and E are the most frequent letters in the Bahasa Indonesia. You can view the full distribution [here](https://www.sttmedia.com/characterfrequency-indonesian), and this is the top 10 most frequent letters:
 
 | Letter | Frequency |
 | --- | --- |
@@ -47,7 +47,7 @@ Using this information, the guess ANTIK or ETIKA might be better than random fiv
 
 ## Statistical Approach
 
-Information theory is a statistical way to measure the quantity of information. It is used widely in the data mining and machine learning field. In Natural Language Processing (NLP) domain, every lexicon of words shares information in such phrases and sentences constructed from it. This implies, if I can capture as much information from my guesses, I can determine which word is the most optimal as the first guess.
+Information theory is a statistical way to measure the quantity of information. It is used widely in the data mining and machine learning field. In Natural Language Processing (NLP), each lexicon of  phrases bear distinctive information that related to the phrases itself as a baseline for constructing sentences. This implies, if I can capture as much information from my guesses, I can determine which word is the most optimal as the first guess.
 
 # Finding Optimal First Guess Using Information Theory
 
@@ -59,7 +59,7 @@ $$
 h(x)=\log_{2}(1/p(x))=-\log_{2}p(x)
 $$
 
-The lower the probability of the event, the higher the information. The meaning of the term “event” may not be intuitively straightforward, yet you can find the practical application later on.
+The lower the probability of the event, the higher the information. To fully understand the actual meaning of the term “event”, you will find it within the practical application below.
 
 ## Entropy
 
@@ -69,11 +69,11 @@ $$
 H(X)=\mathop{{}\mathbb{E}}[h(x)]=-\sum_{x\in X}p(x)\log_{2}p(x)
 $$
 
-The function $H(X)$ is called entropy (or Shannon entropy). It is the expected or the average amount of information we could obtain from certain events. The higher the entropy, the more information it contains.
+The function $H(X)$ is called entropy (or Shannon entropy). It is the expected or the average amount of information we could obtain from certain events. The higher the entropy, the more information it comprised.
 
 ## Calculating Entropy
 
-To calculate each guess’ entropy, we should first understand what is the “event” we are going to observe. As stated in the game rules section, after each guess the game system will provide us feedback. There are three possible colors (grey, yellow, and green) and there are five boxes representing five letters each, so there would be $3^5=243$ possible permutation of patterns.
+To calculate each guess’ entropy, we should first understand what is the “event” we are going to observe. As stated in the game rules section, after each guesses the game system will provide us feedback. There are three possible colors (grey, yellow, and green) and represent a letter inside it, so there would be $3^5=243$ possible permutation of patterns.
 
 ### Breaking Down the Case
 
@@ -81,9 +81,9 @@ Let’s take a look at one of the possible patterns, using my favorite guess ANI
 
 ![animo-case.PNG](animo-case.png)
 
-The letter A and M are correct but misplaced. While the remaining letter N, I, and O are incorrect. How many five-letter words in the Indonesian language do not contain N, I, and O, but contain A and M not in the 1st and 4th place respectively? 
+The letter A and M are correct but misplaced. While the remaining letter N, I, and O are incorrect. How many five-letter words in the Bahasa Indonesia do not contain N, I, and O, but contain A and M not in the 1st and 4th place respectively? 
 
-To answer this question, let’s break down the case. Assume that each possible pattern (of feedback) is a discrete random variable, this is what the “event” we ought to observe. Each event has a probability of happening. Its probability is counted by comparing how many five-letter words satisfy a certain pattern with how many five-letter words exist.
+To answer this question, let’s break down the case. Assume that each possible patterns (of feedback) is a discrete random variable, this is what the “event” we ought to observe. Each events has a probability of happening. Its probability is counted by comparing how many five-letter words comply a certain pattern with how many five-letter words exist.
 
 $$
 p(x)=\frac{\\#\ words\ that\ satisfy\ pattern}{\\#\  all\ possible\ words}
@@ -93,10 +93,10 @@ $$
 
 In Katla, 8311 five-letter words could be a “secret” word. I have downloaded this word list from Katla’s [GitHub](https://github.com/pveyes/katla) page. Knowing this, we can answer the question we left above.
 
-> How many five-letter words in Indonesian language that do not contain N, I, and O, but contain A and M not in the 1st and 4th place respectively?
+> How many five-letter words in Bahasa Indonesia that do not contain N, I, and O, but contain A and M not in the 1st and 4th place respectively?
 > 
 
-With a simple analytical move, I found 433 words that satisfy this particular pattern.
+With a simple analytical move, I found 433 words that comply this particular pattern.
 
 | # | Word |
 | --- | --- |
@@ -121,7 +121,7 @@ $$
 h(x)=-\log_{2}(0.05209)=4.26\ bits
 $$
 
-The information we got from this specific pattern is 4.26 bits, and this pattern is just one of all 243 possible patterns. To get the expected or average amount of information, we must first calculate the possibility of each pattern.
+The information we got from this specific pattern is 4.26 bits, and this pattern is just one of all 243 possible patterns. To get the expected or average amount of information, we must first calculate the possibility of each patterns.
 
 | Pattern | # word | Probability | Information amount |
 | --- | --- | --- | --- |
@@ -148,7 +148,7 @@ So, the expected amount of information we got from using ANIMO as a first guess 
 
 ### Finding the Highest Entropy
 
-There are 8311 five-letter words we need to calculate its entropy value. I have been working with an algorithm to calculate each pattern probability and aggregate them for each word. Since I am not an expert in programming, my algorithm worked but took 3.14 hours (yes, 3 hours lol) to finish the whole process, its around 1.36 second per word. And here is the result:
+There are 8311 five-letter words we need to calculate its entropy value. I have been working with an algorithm to calculate each pattern probability and aggregate them for each word. Since I am not an expert in programming, my algorithm worked but took 3.14 hours (yes, 3 hours lol) to finish the whole process, its around 1.36 second per words. And here is the result:
 
 | Rank | Word | Entropy |
 | --- | --- | --- |
@@ -296,9 +296,10 @@ Using Information Theory, we learned that the word SARIK is expected to give the
 
 ## Next Steps
 
-After knowing the optimal first guess, the next step to do is to solve the game itself. Since you know the optimal first guess only, there are still 5 guesses remaining. For now, there is no algorithm to solve Katla using Information Theory, but there is various study done for Wordle. One of the studies, that is also the inspiration of this study, that is well spoken is by [Grant Sanderson](https://www.3blue1brown.com/lessons/wordle). Hence, I leave it to you to do further exploration! :D
+After knowing the optimal first guess, the next step to do is to solve the game itself. Since you know the optimal first guess only, there are still 5 guesses remaining. For now, there is no algorithm to solve Katla using Information Theory, but there are various study done for Wordle. One of the studies, that is also the inspiration of this study, well spoken by [Grant Sanderson](https://www.3blue1brown.com/lessons/wordle). Hence, I leave it to you to do the further exploration! :D
 
 > *Have you done your Katla today? :)*
+> 
 
 # Reference
 
