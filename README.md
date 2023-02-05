@@ -73,11 +73,11 @@ The function $H(X)$ is called entropy (or Shannon entropy). It is the expected o
 
 ## Calculating Entropy
 
-To calculate each guess’ entropy, we should first understand what is the “event” we are going to observe. As stated in the game rules section, after each guesses the game system will provide us feedback. There are three possible colors (grey, yellow, and green) and represent a letter inside it, so there would be $3^5=243$ possible permutation of patterns.
+To calculate each guesses’ entropy, we should first understand what is the “event” we are going to observe. As stated in the game rules section, after each guesses the game system will provide us feedback. There are three possible colors (grey, yellow, and green) and represent a letter inside it, so there would be $3^5=243$ possible permutation of patterns.
 
 ### Breaking Down the Case
 
-Let’s take a look at one of the possible patterns, using my favorite guess ANIMO.
+Let’s take a look at one of the possible patterns, using my favorite first guess ANIMO.
 
 ![animo-case.PNG](animo-case.png)
 
@@ -86,7 +86,7 @@ The letter A and M are correct but misplaced. While the remaining letter N, I, a
 To answer this question, let’s break down the case. Assume that each possible patterns (of feedback) is a discrete random variable, this is what the “event” we ought to observe. Each events has a probability of happening. Its probability is counted by comparing how many five-letter words comply a certain pattern with how many five-letter words exist.
 
 $$
-p(x)=\frac{\\#\ words\ that\ satisfy\ pattern}{\\#\  all\ possible\ words}
+p(x)=\frac{\\#\ words\ that\ comply\ pattern}{\\#\  all\ possible\ words}
 $$
 
 ### Katla Implementation
@@ -168,7 +168,7 @@ In this section, I will break down the algorithm I used to calculate entropy. If
 **First**, finding words that satisfy certain patterns. I partitioned this process into five subprocesses:
 
 (1) identifying each pattern’s meaning;
-********************I encoded each pattern with E, P, and N which stands for Exact match (green box), Partial match (yellow box), and No match (grey box). Patterns that have E(s) mean it contains an exact pattern that can be searched via regex. Patterns that have P(s) mean two things, words contain P(s) letters but not in the same position as the P(s), and duplicated P(s) letters must be considered. Patterns that have N(s) mean it should not contain any of the N(s) letters.********************
+*I encoded each pattern with E, P, and N which stands for Exact match (green box), Partial match (yellow box), and No match (grey box). Patterns that have E(s) mean it contains an exact pattern that can be searched via regex. Patterns that have P(s) mean two things, words contain P(s) letters but not in the same position as the P(s), and duplicated P(s) letters must be considered. Patterns that have N(s) mean it should not contain any of the N(s) letters.*
 
 ```r
 #>    label pattern contains not_contains
