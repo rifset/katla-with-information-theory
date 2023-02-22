@@ -1,5 +1,7 @@
 # How to Guess Optimally Your First Katla Word According to Theory Information
 
+![](cover-gt.jpg)
+
 ## Introduction
 
 [Katla](https://katla.vercel.app/) is the adaption version of [Wordle](https://www.nytimes.com/games/wordle/)—a viral daily word game by the New York Times—which has the goal to guess a five-letter “secret” word. While Wordle is serve in English, Katla is an adaptation in a form of Bahasa Indonesia. Katla was created by [Fatih Kalifa](https://fatihkalifa.com/), a software engineer from Indonesia, and was launched on January 20th, 2022 [1].
