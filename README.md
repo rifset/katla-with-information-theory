@@ -1,10 +1,10 @@
 # How to Guess Optimally Your First Katla Word According to Theory Information
 
-# Introduction
+## Introduction
 
 [Katla](https://katla.vercel.app/) is the adaption version of [Wordle](https://www.nytimes.com/games/wordle/)—a viral daily word game by the New York Times—which has the goal to guess a five-letter “secret” word. While Wordle is serve in English, Katla is an adaptation in a form of Bahasa Indonesia. Katla was created by [Fatih Kalifa](https://fatihkalifa.com/), a software engineer from Indonesia, and was launched on January 20th, 2022 [1].
 
-# Game Rules
+## Game Rules
 
 As mentioned above, the goal is to guess a five-letter “secret” word. Each person has six attempts to guess the correct “secret” word. 
 
@@ -18,15 +18,15 @@ For each guesses the game will provide feedbacks on which letters are correct an
 - Yellow: the letter is in the “secret” word, but misplaced
 - Green: the letter is in the “secret” word, and placed correctly
 
-# What is the Optimal First Guess for Katla?
+## What is the Optimal First Guess for Katla?
 
 Depending on what the definition of “optimal” is, here are my three approaches to it:
 
-## Unique Letters
+### Unique Letters
 
 Words containing more unique letters should be better than words with duplicated letters in them. The idea is simple, the more unique letters submitted, the more information you could get from each guesses’ feedback. There is a plethora of words to use as the first guess such as KAGET, LOBAK, MANDI, etc. Yet, with this approach, I could not decide what specific word is the optimal first guess.
 
-## Most Frequent Letters
+### Most Frequent Letters
 
 After a quick research, I found that the letters A, N, and E are the most frequent letters in the Bahasa Indonesia. You can view the full distribution [here](https://www.sttmedia.com/characterfrequency-indonesian), and this is the top 10 most frequent letters:
 
@@ -45,13 +45,13 @@ After a quick research, I found that the letters A, N, and E are the most freque
 
 Using this information, the guess ANTIK or ETIKA might be better than random five-letter word guesses. But is there any measurement of how better the guesses are? Is there any justification to claim that ANTIK is a better first guess than MANDI, or ETIKA is a better first guess than LOBAK? Even with these findings, the optimal first guess could not be determined.
 
-## Statistical Approach
+### Statistical Approach
 
 Information theory is a statistical way to measure the quantity of information. It is used widely in the data mining and machine learning field. In Natural Language Processing (NLP), each lexicon of  phrases bear distinctive information that related to the phrases itself as a baseline for constructing sentences. This implies, if I can capture as much information from my guesses, I can determine which word is the most optimal as the first guess.
 
 # Finding Optimal First Guess Using Information Theory
 
-## What is Information?
+### What is Information?
 
 Information is measured in bits. The concept of "information" is essentially about storage and the storage of information is bits [2]. Information as a function of probability is denoted as:
 
@@ -61,7 +61,7 @@ $$
 
 The lower the probability of the event, the higher the information. To fully understand the actual meaning of the term “event”, you will find it within the practical application below.
 
-## Entropy
+### Entropy
 
 Since $h(x)$ is a function of a random variable, it has many possible outcomes. Thus, to aggregate those information pieces, we take the expectation over $h(x)$, assuming it is a discrete random variable.
 
@@ -71,7 +71,7 @@ $$
 
 The function $H(X)$ is called entropy (or Shannon entropy). It is the expected or the average amount of information we could obtain from certain events. The higher the entropy, the more information it comprised.
 
-## Calculating Entropy
+### Calculating Entropy
 
 To calculate each guesses’ entropy, we should first understand what is the “event” we are going to observe. As stated in the game rules section, after each guesses the game system will provide us feedback. There are three possible colors (grey, yellow, and green) and represent a letter inside it, so there would be $3^5=243$ possible permutation of patterns.
 
@@ -89,7 +89,7 @@ $$
 p(x)=\frac{\\#\ words\ that\ comply\ pattern}{\\#\  all\ possible\ words}
 $$
 
-### Katla Implementation
+#### Katla Implementation
 
 In Katla, 8311 five-letter words could be a “secret” word. I have downloaded this word list from Katla’s [GitHub](https://github.com/pveyes/katla) page. Knowing this, we can answer the question we left above.
 
@@ -146,7 +146,7 @@ $$
 
 So, the expected amount of information we got from using ANIMO as a first guess in Katla is 4.57 bits.
 
-### Finding the Highest Entropy
+#### Finding the Highest Entropy
 
 There are 8311 five-letter words we need to calculate its entropy value. I have been working with an algorithm to calculate each pattern probability and aggregate them for each word. Since I am not an expert in programming, my algorithm worked but took 3.14 hours (yes, 3 hours lol) to finish the whole process, its around 1.36 second per words. And here is the result:
 
@@ -161,7 +161,7 @@ There are 8311 five-letter words we need to calculate its entropy value. I have 
 | 8310 | KOKOK | 2.3433 |
 | 8311 | FONON | 2.3325 |
 
-### Behind the Process
+#### Behind the Process
 
 In this section, I will break down the algorithm I used to calculate entropy. If you want to skip this part, you can jump to the conclusion section.
 
@@ -288,20 +288,19 @@ Recap: the guess ANIMO with PNEPN (🟨⬛🟩🟨⬛) pattern leaving just 7 wo
 
 **Then**, repeat the process for 8311 words :)
 
-# Conclusion
+## Conclusion
 
-## Optimal First Guess
+### Optimal First Guess
 
 Using Information Theory, we learned that the word SARIK is expected to give the most information when used as a first guess. Note that the letter S is not in the top 10 frequent letters in the Indonesian language, while the other four letters are. Also, there is no duplicated letter in the word SARIK, nor for the top 10 words with the highest entropy. 
 
-## Next Steps
+### Next Steps
 
 After knowing the optimal first guess, the next step to do is to solve the game itself. Since you know the optimal first guess only, there are still 5 guesses remaining. For now, there is no algorithm to solve Katla using Information Theory, but there are various study done for Wordle. One of the studies, that is also the inspiration of this study, well spoken by [Grant Sanderson](https://www.3blue1brown.com/lessons/wordle). Hence, I leave it to you to do the further exploration! :D
 
-> *Have you done your Katla today? :)*
-> 
+> ***Have you done your Katla today? :)***
 
-# Reference
+## Reference
 
 [1] Narabahasa, “Sesi Twitter spaces narabahasa: Fatih Kalifa Ungkap Fakta Menarik Seputar Katla,” *Narabahasa*, 01-Mar-2022. [Online]. Available: https://narabahasa.id/berita/sesi-twitter-spaces-narabahasa-fatih-kalifa-ungkap-fakta-menarik-seputar-katla. [Accessed: 31-Jan-2023]. 
 
