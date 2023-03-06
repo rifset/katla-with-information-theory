@@ -2,6 +2,28 @@
 
 ![](cover-gt.jpg)
 
+## Table of Content
+  - [Introduction](#introduction)
+  - [Game Rules](#game-rules)
+  - [What is the Optimal First Guess for Katla?](#what-is-the-optimal-first-guess-for-katla)
+    * [Unique Letters](#unique-letters)
+    * [Most Frequent Letters](#most-frequent-letters)
+    * [Statistical Approach](#statistical-approach)
+  - [Finding Optimal First Guess Using Information Theory](#finding-optimal-first-guess-using-information-theory)
+    * [What is Information?](#what-is-information)
+    * [Entropy](#entropy)
+    * [Calculating Entropy](#calculating-entropy)
+    * [Breaking Down the Case](#breaking-down-the-case)
+      + [Katla Implementation](#katla-implementation)
+      + [Finding the Highest Entropy](#finding-the-highest-entropy)
+      + [Behind the Process](#behind-the-process)
+  - [Conclusion](#conclusion)
+    * [Optimal First Guess](#optimal-first-guess)
+    * [Next Steps](#next-steps)
+  - [Reference](#reference)
+  
+ ---
+
 ## Introduction
 
 [Katla](https://katla.vercel.app/) is the adaption version of [Wordle](https://www.nytimes.com/games/wordle/)—a viral daily word game by the New York Times—which has the goal to guess a five-letter “secret” word. While Wordle is serve in English, Katla is an adaptation in a form of Bahasa Indonesia. Katla was created by [Fatih Kalifa](https://fatihkalifa.com/), a software engineer from Indonesia, and was launched on January 20th, 2022 [1].
@@ -51,7 +73,7 @@ Using this information, the guess ANTIK or ETIKA might be better than random fiv
 
 Information theory is a statistical way to measure the quantity of information. It is used widely in the data mining and machine learning field. In Natural Language Processing (NLP), each lexicon of  phrases bear distinctive information that related to the phrases itself as a baseline for constructing sentences. This implies, if I can capture as much information from my guesses, I can determine which word is the most optimal as the first guess.
 
-# Finding Optimal First Guess Using Information Theory
+## Finding Optimal First Guess Using Information Theory
 
 ### What is Information?
 
